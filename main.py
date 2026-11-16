@@ -63,6 +63,9 @@ def choose(fen,legal):
   pos=b.copy();play(pos,m,ep,white);z=square(m[2:4])
   score=(value(pos)*(1 if white else -1))-before
   if pos[z] and pos[z].lower()!='k' and attacked(pos,z,not white):score-=V[pos[z].lower()]
+  enemy='k' if white else 'K'
+  king=pos.index(enemy) if enemy in pos else None
+  if king is not None and attacked(pos,king,white):score+=50
   if score>high:best,high=m,score
  return best
 def post(url,path,body):
